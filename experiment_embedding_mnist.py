@@ -8,7 +8,6 @@ from utilities.embedding import voltage_embedding, multi_dim_scaling
 from utilities.data_io import save_config
 
 import matplotlib
-matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
 

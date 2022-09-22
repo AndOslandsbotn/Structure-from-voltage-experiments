@@ -4,7 +4,6 @@ import csv
 from pathlib import Path
 
 import matplotlib
-matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
 def plot_domain3D(x, lm_indices_all_lm, radius, title):

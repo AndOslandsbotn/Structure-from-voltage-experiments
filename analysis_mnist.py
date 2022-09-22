@@ -2,7 +2,6 @@ from utilities.mnist_exp_util import internal_distances
 from utilities.mnist_exp_util import load_mnist, pre_processing
 
 import matplotlib
-matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
 if __name__ == '__main__':

@@ -3,7 +3,6 @@ import math as m
 import os
 
 import matplotlib
-matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
 def Rx(theta):

@@ -1,7 +1,6 @@
 from utilities.color_maps import color_map, color_map_for_mnist, color_map_list
 
 import matplotlib
-matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 from matplotlib.pylab import Rectangle, gca
 import matplotlib.pyplot as PLT

@@ -4,7 +4,6 @@ import csv
 from pathlib import Path
 
 import matplotlib
-matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
 from utilities.embedding import voltage_embedding, multi_dim_scaling, euclidean_distance_matrix
