@@ -1,12 +1,11 @@
 import numpy as np
-import os
 
 import matplotlib
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
-from utilities.embedding import voltage_embedding, multi_dim_scaling
-from utilities.data_generators import unit_square_domain
+from utilities.embedding import voltage_embedding, multi_dim_scaling, euclidean_distance_matrix
+from utilities.data_generators import sample_2d_unit_square
 
 def plot_domain3D(x, lm_indices_all_lm, radius, title):
     fig = plt.figure()
@@ -35,7 +34,6 @@ if __name__ == '__main__':
     d = 2
     D = 4
     eps = 10 ** (-3)
-    N = 1000
 
     # Variables
     bw = 0.1  # Bandwidth
@@ -48,12 +46,11 @@ if __name__ == '__main__':
 
     # Load plane
     n = 2**12
-    plane = unit_square_domain(n, eps=10**(-3))
+    plane = sample_2d_unit_square(n, eps=10**(-3))
 
     # Make embedding
     lms = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
     voltage_embedding, source_indices = voltage_embedding(plane, lms, n, bw, rs, rhoG, config)
-
     mds_embedding = multi_dim_scaling(voltage_embedding, mds_embedding_dim)
 
     # Visualize

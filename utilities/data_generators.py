@@ -21,6 +21,13 @@ def Rz(theta):
                       [m.sin(theta), m.cos(theta), 0],
                       [0, 0, 1]])
 
-def unit_square_domain(n, eps):
+def sample_2d_unit_square(n, eps):
     return np.random.uniform(low=0, high=1, size=(n, 2))
+
+def sample_data_uniform_sphere(N, D, sigma_eps):
+    # Sample detachment coefficients from ||k||_2 < noise_level * sqrt(D - 1)
+    X = np.random.normal(size = (D, N))
+    X = X/np.linalg.norm(X, axis = 0)
+    X = X.T
+    return X
 
