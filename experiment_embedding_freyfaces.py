@@ -5,27 +5,12 @@ from pathlib import Path
 
 from utilities.freyface_exp_util import select_landmarks_kmeanspp, select_landmarks_max_spread, select_landmarks_standard
 from utilities.embedding import voltage_embedding, multi_dim_scaling
-import json
+from utilities.data_io import save_config
 
 import matplotlib
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
-def save_config(folder, config, bw, rhoG, rs):
-    filepath = os.path.join('Results', folder)
-    Path(filepath).mkdir(parents=True, exist_ok=True)
-
-    config['bw'] = bw
-    config['rhoG'] = rhoG
-    config['rs'] = rs
-
-    # Serializing json
-    json_object = json.dumps(config, indent=4)
-
-    # Writing to sample.json
-    with open(os.path.join(filepath, "config.json"), "w") as outfile:
-        outfile.write(json_object)
-    return
 
 def save_experiment(data, mds_emb, v_emb, idx_lms, idx_sources, folder):
     print("Save experiment")
@@ -90,3 +75,5 @@ if __name__ == '__main__':
     for i in range(nlm):
         plt.plot(v_sort[:, i], label=f'v{i}')
     plt.savefig(os.path.join('Results', folder, 'VoltageDecayFF'))
+
+

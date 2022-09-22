@@ -69,17 +69,10 @@ def plot_images_xy_plane(mds_emb, ff, idx_lms, idx_sources, nlm):
     fig.savefig(os.path.join('Figures', f'freyface_embedding_nlm{nlm}.eps'), format='eps')
 
 def load_freyface_embedding(filepath):
-    #embedding_freyfaces = np.load(os.path.join(filepath, 'embedding_freyfaces.npz'))
-
     with np.load(os.path.join(filepath, 'embedding_freyfaces.npz')) as data:
         ff = data['ff_data']
         mds_emb = data['mds_emb']
         v_emb = data['v_emb']
-
-    #with open('my_csv.csv', newline='') as file:
-
-        #reader = csv.reader(file, quoting=csv.QUOTE_NONNUMERIC,
-        #                    delimiter=' ')
 
     with open(os.path.join(filepath, 'idx_lm')) as csv_file:
         csv_reader = csv.reader(csv_file, quoting=csv.QUOTE_NONNUMERIC, delimiter=',')
@@ -98,10 +91,11 @@ def load_freyface_embedding(filepath):
     return ff, mds_emb, v_emb, idx_lm, idx_sources
 
 if __name__ == '__main__':
-    exp_nr = 3
+    exp_nr = 2
     nlm = 10
 
-    filepath = os.path.join('Results', f'FreyFacesNlm{nlm}_expnr{exp_nr}')
+    folder = f'FreyFacesNlm{nlm}_expnr{exp_nr}'
+    filepath = os.path.join('Results', folder)
     ff, mds_emb, v_emb, idx_lms, idx_sources = load_freyface_embedding(filepath)
 
     source_points = []
@@ -111,11 +105,6 @@ if __name__ == '__main__':
     landmarks = []
     for idx in idx_lms:
         landmarks.append(ff[idx])
-
-    v_sort = np.sort(v_emb, axis= 0)
-    plt.figure()
-    for i in range(nlm):
-        plt.plot(v_sort[:, i], label=f'v{i}')
 
     # visualize_landmarks(landmarks)
 

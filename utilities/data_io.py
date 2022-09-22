@@ -1,6 +1,23 @@
 from pathlib import Path
 import numpy as np
 import os
+import json
+
+def save_config(folder, config, bw, rhoG, rs):
+    filepath = os.path.join('Results', folder)
+    Path(filepath).mkdir(parents=True, exist_ok=True)
+
+    config['bw'] = bw
+    config['rhoG'] = rhoG
+    config['rs'] = rs
+
+    # Serializing json
+    json_object = json.dumps(config, indent=4)
+
+    # Writing to sample.json
+    with open(os.path.join(filepath, "config.json"), "w") as outfile:
+        outfile.write(json_object)
+    return
 
 def load_data(directory, filename):
     print("Load from file")

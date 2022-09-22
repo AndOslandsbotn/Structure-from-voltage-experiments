@@ -19,3 +19,4 @@ def get_nn_indices(x, y, r):
     nn_indices = {i: set(idx) for i, idx in enumerate(indices)}
     nn_vector = [item for sublist in indices for item in sublist]
     return nn_indices, nn_vector
+
