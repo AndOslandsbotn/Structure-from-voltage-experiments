@@ -11,9 +11,11 @@ def voltage_embedding(x, lms, n, bw, rs, rhoG, config):
     Parameters
     ----------
     :param x: Data points n x d numpy array, where n is the number of points, d the dimension
-    :param lms: Landmarks m x d numpy array, where m is the number of landmarks, d the dimension
+    :param lms: Source landmarks m x d numpy array, where m is the number of landmarks, d the dimension
     :param rs: Source radius
     :return:
+    voltages: embedding n x m numpy array
+    source_indices_l: list of source indices for all points in distance rs from a source landmark
     """
     voltages = []
     source_indices_l = []
@@ -34,7 +36,7 @@ def multi_dim_scaling(x):
     Parameters
     ----------
     :param x: Coordinates as n x d numpy array, where n is number of training examples and d is the dimension
-    :return:
+    :return: euclidean distance matrix n x n numpy array
     """
     voltages_centered = x - np.mean(x, axis =0)
     u, sigma, vh = np.linalg.svd(voltages_centered)

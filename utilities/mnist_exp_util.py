@@ -7,6 +7,7 @@ import os
 import csv
 
 def internal_distances(mnistdata):
+    """Calculate the internal distance between all datapoints in mnistdata"""
     distances = cdist(mnistdata, mnistdata)
     plt.figure()
     indices = np.random.choice(np.arange(0, len(mnistdata)), size=100)
@@ -14,12 +15,15 @@ def internal_distances(mnistdata):
         plt.plot(np.sort(distances[idx, :]))
 
 def load_mnist():
+    """Load mnist data"""
     with np.load(os.path.join('Data', 'mnist.npz')) as data:
         x = data['x_train'].reshape(-1, 28*28)
         y = data['y_train']
     return x, y
 
 def pre_processing(datasize, mnistdata, target):
+    """Preprocessing of the mnist data. Select dataset of size datasize and normalize using
+    max value in the selected dataset"""
     idx = np.random.choice(np.arange(0, len(mnistdata)), size=datasize)
     mnistdata = mnistdata[idx]
     target = target[idx]

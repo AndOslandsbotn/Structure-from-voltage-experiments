@@ -20,6 +20,9 @@ def save_experiment(data, mds_emb, v_emb, idx_lms, idx_sources, folder):
         write.writerows(idx_sources)
 
 def select_landmarks_standard(data, n, nlm):
+    """Randomly select nlm landmarks from data,
+    n is the size of the dataset
+    """
     idx = np.random.choice(np.arange(0, n), size=nlm)
     return data[idx]
 
@@ -49,6 +52,7 @@ def select_landmarks_kmeanspp(data, n, nlm):
     return np.array(lms).reshape(nlm, -1), lms_idx
 
 def select_landmarks_max_spread(data, n, nlm):
+    """Select landmarks nlm from data and make certain they are maximaly spread"""
     lms = []
     lms_idx = []
 

@@ -1,9 +1,11 @@
 import scipy.spatial as spatial
 
 def get_union(list1, list2):
+    """Get union of two lists"""
     return list(set(list1 + list2))
 
 def get_intersection(list1, list2):
+    """Get intersetction between two lists"""
     set1 = set(list1)
     intersect = set1.intersection(set(list2))
     return list(intersect)
