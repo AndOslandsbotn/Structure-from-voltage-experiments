@@ -29,7 +29,7 @@ def voltage_embedding(x, lms, n, bw, rs, rhoG, config):
                                           source_indices, config['is_Wtilde']))
     return np.array(voltages).transpose(), source_indices_l
 
-def multi_dim_scaling(x, embedding_dim):
+def multi_dim_scaling(x):
     """ Make multi-dimensional scaling embedding of x
     Parameters
     ----------
@@ -42,7 +42,7 @@ def multi_dim_scaling(x, embedding_dim):
     s_temp[0:len(sigma)] = sigma[0:len(sigma)]
     sigma = s_temp
     x_mds= np.dot(u, np.diag(sigma))
-    return x_mds[:, 0:embedding_dim]
+    return x_mds
 
 # Multi-dim scaling
 def distance_matrix(X):

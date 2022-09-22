@@ -1,4 +1,7 @@
 import numpy as np
+import os
+import csv
+from pathlib import Path
 
 import matplotlib
 matplotlib.use('TkAgg')
@@ -7,20 +10,15 @@ import matplotlib.pyplot as plt
 from utilities.embedding import voltage_embedding, multi_dim_scaling, euclidean_distance_matrix
 from utilities.data_generators import sample_2d_unit_square
 
-def plot_domain3D(x, lm_indices_all_lm, radius, title):
-    fig = plt.figure()
-    plt.title(title)
-    ax = fig.add_subplot(projection='3d')
-    ax.scatter(x[:-1, 0], x[:-1, 1], x[:-1, 2], c=radius)
-    for lm_indices in lm_indices_all_lm:
-        ax.scatter(x[lm_indices, 0],
-                    x[lm_indices, 1],
-                    x[lm_indices, 2],
-                    marker='s', c='red')
-    ax.set_xlabel('X-axis')
-    ax.set_ylabel('Y-axis')
-    ax.set_zlabel('Z-axis')
-    ax.view_init(-0, 0)
+def save_experiment(plane, mds_emb, v_emb, idx_sources, folder):
+    filepath = os.path.join('Results', folder)
+    Path(filepath).mkdir(parents=True, exist_ok=True)
+
+    np.savez(os.path.join(filepath, 'embedding_plane.npz'), plane=plane, mds_emb=mds_emb, v_emb=v_emb)
+
+    with open(os.path.join(filepath, 'idx_sources'), 'w', newline="") as f:
+        write = csv.writer(f)
+        write.writerows(idx_sources)
 
 if __name__ == '__main__':
     ###############################################
@@ -39,9 +37,6 @@ if __name__ == '__main__':
     bw = 0.1  # Bandwidth
     rhoG = 1.e-5  # Inverse of resistance to ground
     rs = 0.2  # Source radius
-
-    # Embedding dim for the multi-dim scaling analysis
-    mds_embedding_dim = 3
     ###############################################
 
     # Load plane
@@ -50,11 +45,8 @@ if __name__ == '__main__':
 
     # Make embedding
     lms = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
-    voltage_embedding, source_indices = voltage_embedding(plane, lms, n, bw, rs, rhoG, config)
-    mds_embedding = multi_dim_scaling(voltage_embedding, mds_embedding_dim)
+    v_embedding, source_indices = voltage_embedding(plane, lms, n, bw, rs, rhoG, config)
+    mds_embedding = multi_dim_scaling(v_embedding)
 
-    # Visualize
-    radius = np.sqrt(np.sum(plane, axis=1))
-    plot_domain3D(voltage_embedding, source_indices, radius, title='Unit square voltage embedding')
-    plot_domain3D(mds_embedding, source_indices, radius, title='Unit square mds embedding')
-    plt.show()
+    folder = f'PlaneD{D}d{d}Nlm{len(lms)}'
+    save_experiment(plane, mds_embedding, v_embedding, source_indices, folder)

@@ -66,15 +66,12 @@ if __name__ == '__main__':
     # Sphere specifications
     d = 3
     eps = 10 ** (-4)
-    n = 2 ** 13
+    n = 2 ** 15
 
     # Variables
     bw = 0.1  # Bandwidth
     rhoG = 1.e-5  # Inverse of resistance to ground
     rs = 0.2  # Source radius
-
-    # Embedding dim for the multi-dim scaling analysis
-    mds_embedding_dim = -1
 
     # Number of landmarks (sources)
     nlm = 5
@@ -91,18 +88,18 @@ if __name__ == '__main__':
 
     lms = place_landmarks(nlm, limits)
     n_ss = len(sphere_section)
-    voltage_embedding, source_indices = voltage_embedding(sphere_section, lms, n_ss, bw, rs, rhoG, config)
-    mds_embedding = multi_dim_scaling(voltage_embedding, mds_embedding_dim)
+    v_embedding, source_indices = voltage_embedding(sphere_section, lms, n_ss, bw, rs, rhoG, config)
+    mds_embedding = multi_dim_scaling(v_embedding)
 
     # Use orthogonal procrustes analysis to rotate and translate the MDS embedding to best fit the original orientation
     mds_embedding_rot = orth_procrustes_edm_to_x(sphere_section.transpose(), mds_embedding[:-1, :-1].transpose(), len(sphere_section), 6)
     mds_embedding_rot = mds_embedding_rot.transpose()
 
-    save_experiment(sphere_section, mds_embedding[:, 0:3], voltage_embedding, source_indices, idx_lat, idx_long, folder=ExpFolder)
-    save_experiment(sphere_section, mds_embedding_rot, voltage_embedding, source_indices, idx_lat, idx_long, folder=ExpFolder)
+    save_experiment(sphere_section, mds_embedding[:, 0:3], v_embedding, source_indices, idx_lat, idx_long, folder=ExpFolder)
+    save_experiment(sphere_section, mds_embedding_rot, v_embedding, source_indices, idx_lat, idx_long, folder=ExpFolder)
 
     # Visualize
-    plot_domain3D(voltage_embedding, source_indices, voltage_embedding[0:n_ss, 0], title='Sphere segment with voltage vector')
-    plot_domain3D(mds_embedding, source_indices, voltage_embedding[0:n_ss, 0], title='Sphere segment with MDS vectors')
-    plot_domain3D(mds_embedding_rot, source_indices, voltage_embedding[0:n_ss-1, 0], title='Sphere segment with rotated MDS vectors')
+    plot_domain3D(v_embedding, source_indices, v_embedding[0:n_ss, 0], title='Sphere segment with voltage vector')
+    plot_domain3D(mds_embedding, source_indices, v_embedding[0:n_ss, 0], title='Sphere segment with MDS vectors')
+    plot_domain3D(mds_embedding_rot, source_indices, v_embedding[0:n_ss-1, 0], title='Sphere segment with rotated MDS vectors')
     plt.show()
