@@ -30,7 +30,7 @@ def voltage_embedding(x, lms, n, bw, rs, rhoG, config):
         init_voltage = np.zeros(n + 1)
         init_voltage = apply_voltage_constraints(init_voltage, source_indices)
 
-        # Propagate the voltage to all points in the mnistdataset
+        # Propagate the voltage to all points in the dataset
         voltages.append(propagate_voltage(init_voltage, matrix, config['max_iter'],
                                           source_indices, config['is_Wtilde']))
     return np.array(voltages).transpose(), source_indices_l
