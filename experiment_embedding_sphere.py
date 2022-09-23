@@ -87,7 +87,8 @@ if __name__ == '__main__':
 
     lms = place_landmarks(nlm, limits)
     n_ss = len(sphere_section)
-    v_embedding, source_indices = voltage_embedding(sphere_section, lms, n_ss, bw, rs, rhoG, config)
+    v_embedding, source_indices = voltage_embedding(sphere_section, lms, n_ss, bw, rs, rhoG,
+                                                    config, is_visualization=True)
     mds_embedding = multi_dim_scaling(v_embedding)
 
     # Use orthogonal procrustes analysis to rotate and translate the MDS embedding to best fit the original orientation

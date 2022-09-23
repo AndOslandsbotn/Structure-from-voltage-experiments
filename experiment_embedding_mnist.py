@@ -58,7 +58,8 @@ if __name__ == '__main__':
     n_mnist = len(mnistdata)
     lms, idx_lms = select_landmarks_mnist_standard(mnistdata, digit_indices, num_lm_per_digit)
 
-    v_embedding, source_indices = voltage_embedding(mnistdata, lms, n_mnist, bw, rs, rhoG, config)
+    v_embedding, source_indices = voltage_embedding(mnistdata, lms, n_mnist, bw, rs, rhoG,
+                                                    config, is_visualization=True)
     mds_embedding = multi_dim_scaling(v_embedding)
 
     save_experiment(mnistdata, target, mds_embedding, v_embedding, idx_lms, source_indices, folder)

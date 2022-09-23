@@ -44,7 +44,8 @@ if __name__ == '__main__':
 
     # Make embedding
     lms = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
-    v_embedding, source_indices = voltage_embedding(plane, lms, n, bw, rs, rhoG, config)
+    v_embedding, source_indices = voltage_embedding(plane, lms, n, bw, rs, rhoG,
+                                                    config, is_visualization=True)
     mds_embedding = multi_dim_scaling(v_embedding)
 
     folder = f'PlaneD{D}d{d}Nlm{len(lms)}'

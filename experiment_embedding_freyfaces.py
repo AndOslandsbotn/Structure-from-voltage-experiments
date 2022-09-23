@@ -63,7 +63,8 @@ if __name__ == '__main__':
     #lms, idx_lms = select_landmarks_max_spread(ff, n, nlm)
     lms, idx_lms = select_landmarks_kmeanspp(ff, n, nlm)
 
-    v_embedding, source_indices = voltage_embedding(ff, lms, n_ff, bw, rs, rhoG, config)
+    v_embedding, source_indices = voltage_embedding(ff, lms, n_ff, bw, rs, rhoG,
+                                                    config, is_visualization=True)
     mds_embedding = multi_dim_scaling(v_embedding)
 
     save_experiment(ff, mds_embedding, v_embedding, idx_lms, source_indices, folder)

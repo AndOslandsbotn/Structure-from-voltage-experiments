@@ -6,7 +6,7 @@ from utilities.matrices import construct_W_matrix
 from utilities.util import get_nn_indices
 from tqdm import tqdm
 
-def voltage_embedding(x, lms, n, bw, rs, rhoG, config):
+def voltage_embedding(x, lms, n, bw, rs, rhoG, config, is_visualization=False):
     """
     Parameters
     ----------
@@ -32,7 +32,8 @@ def voltage_embedding(x, lms, n, bw, rs, rhoG, config):
 
         # Propagate the voltage to all points in the dataset
         voltages.append(propagate_voltage(init_voltage, matrix, config['max_iter'],
-                                          source_indices, config['is_Wtilde']))
+                                          source_indices, config['is_Wtilde'],
+                                          is_visualization))
     return np.array(voltages).transpose(), source_indices_l
 
 def multi_dim_scaling(x):
