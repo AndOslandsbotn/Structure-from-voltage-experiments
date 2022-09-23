@@ -9,7 +9,7 @@ def apply_voltage_constraints(voltage, source_indices):
     voltage[-1] = 0  # Ground voltage
     return voltage
 
-def propagate_voltage(v, matrix, max_iter, source_indices, is_Wtilde=True):
+def propagate_voltage(v, matrix, max_iter, source_indices, is_Wtilde=False):
     """Propagate voltage by iteratively applying the matrix on the voltage vector of
     Parameters
     :param v: Initial voltage vector

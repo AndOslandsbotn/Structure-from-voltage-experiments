@@ -13,20 +13,24 @@ def voltage_embedding(x, lms, n, bw, rs, rhoG, config):
     :param x: Data points n x d numpy array, where n is the number of points, d the dimension
     :param lms: Source landmarks m x d numpy array, where m is the number of landmarks, d the dimension
     :param rs: Source radius
-    :return:
-    voltages: embedding n x m numpy array
-    source_indices_l: list of source indices for all points in distance rs from a source landmark
+    :return voltages: embedding n x m numpy array
+    :return source_indices_l: list of list. Inner list nr i contains
+     source indices for all points in distance rs from source landmark nr i.
     """
     voltages = []
     source_indices_l = []
+    matrix = construct_W_matrix(x, n, bw, rhoG, config) # Construct the adjacency matrix W
     for lm in tqdm(lms, desc='Loop landmarks'):
+        # Get indices of all points in x that are distance $r_s$ from the landmark lm
         source_indices, _ = get_nn_indices(x, lm.reshape(1, -1), rs)
         source_indices = list(source_indices[0])
         source_indices_l.append(source_indices)
 
-        matrix = construct_W_matrix(x, n, bw, rhoG, config)
+        # Initialize a voltage vector, with source and ground constraints applied
         init_voltage = np.zeros(n + 1)
         init_voltage = apply_voltage_constraints(init_voltage, source_indices)
+
+        # Propagate the voltage to all points in the mnistdataset
         voltages.append(propagate_voltage(init_voltage, matrix, config['max_iter'],
                                           source_indices, config['is_Wtilde']))
     return np.array(voltages).transpose(), source_indices_l
