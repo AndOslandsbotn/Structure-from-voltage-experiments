@@ -32,7 +32,11 @@ def pre_processing(datasize, mnistdata, target):
 
 
 def organize_digits(target):
-    """This function finds the indices of all digit 1,2,3,4 such that we know where each type of digit is
+    """This function finds the indices of all digit 1,2,3,4 etc.
+    such that we know where each type of digit is.
+    :param
+    :returns digit_indices: This is a list of numpy arrays. numpy array nr i
+    in the list contains indices to all points that is digit i.
     """
     target_names = np.arange(0, 10)
     digit_indices = []

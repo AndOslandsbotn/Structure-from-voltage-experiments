@@ -106,6 +106,12 @@ if __name__ == '__main__':
         landmarks.append(ff[idx])
 
     # visualize_landmarks(landmarks)
+    v_sort = np.sort(v_emb, axis=0)
+    plt.figure()
+    for i in range(nlm):
+        plt.plot(v_sort[:, i], label=f'Landmark nr {i}')
+    plt.legend()
+    plt.savefig(os.path.join('Results', folder, 'VoltageDecayFF'))
 
     plt.figure()
     plt.scatter(mds_emb[:, 0], mds_emb[:, 1])

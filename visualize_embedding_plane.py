@@ -46,6 +46,13 @@ if __name__ == '__main__':
     plane, mds_embedding, v_embedding, source_indices = load_plane(folder)
 
     # Visualize
+    v_sort = np.sort(v_embedding, axis=0)
+    plt.figure()
+    for i in range(nlm):
+        plt.plot(v_sort[:, i], label=f'Landmark nr {i}')
+    plt.legend()
+    plt.savefig(os.path.join('Results', folder, 'VoltageDecayPlane'))
+
     radius = np.sqrt(np.sum(plane, axis=1))
     plot_domain3D(v_embedding, source_indices, radius, title='Unit square voltage embedding')
     plot_domain3D(mds_embedding, source_indices, radius, title='Unit square mds embedding')

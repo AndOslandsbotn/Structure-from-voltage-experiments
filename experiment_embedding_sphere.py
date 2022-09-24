@@ -99,6 +99,14 @@ if __name__ == '__main__':
     save_experiment(sphere_section, mds_embedding_rot, v_embedding, source_indices, idx_lat, idx_long, folder=ExpFolder)
 
     # Visualize
+    # Visualize
+    v_sort = np.sort(v_embedding, axis=0)
+    plt.figure()
+    for i in range(nlm):
+        plt.plot(v_sort[:, i], label=f'Landmark nr {i}')
+    plt.legend()
+    plt.savefig(os.path.join('Results', ExpFolder, 'VoltageDecaySphere'))
+
     plot_domain3D(v_embedding, source_indices, v_embedding[0:n_ss, 0], title='Sphere segment with voltage vector')
     plot_domain3D(mds_embedding, source_indices, v_embedding[0:n_ss, 0], title='Sphere segment with MDS vectors')
     plot_domain3D(mds_embedding_rot, source_indices, v_embedding[0:n_ss-1, 0], title='Sphere segment with rotated MDS vectors')
