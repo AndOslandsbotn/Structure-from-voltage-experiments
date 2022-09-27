@@ -21,14 +21,20 @@ def load_mnist():
         y = data['y_train']
     return x, y
 
-def pre_processing(datasize, mnistdata, target):
+def pre_processing(datasize, mnistdata, target, digit_type=-1):
     """Preprocessing of the mnist data. Select dataset of size datasize and normalize using
     max value in the selected dataset"""
+    if digit_type>=0 and digit_type<=9:
+        mnistdata=mnistdata[target==digit_type,:]
+        target=target[target==digit_type]
+    if datasize==0:
+        datasize=mnistdata.shape[0]
     idx = np.random.choice(np.arange(0, len(mnistdata)), size=datasize)
     mnistdata = mnistdata[idx]
     target = target[idx]
+    print('pre_processing',mnistdata.shape)
     mnistdata = mnistdata/np.max(mnistdata)
-    return mnistdata, target
+    return mnistdata, target, mnistdata.shape[0]
 
 
 def organize_digits(target):

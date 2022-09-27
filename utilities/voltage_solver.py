@@ -18,7 +18,7 @@ def propagate_voltage(v, matrix, max_iter, source_indices, is_Wtilde=False, is_v
     :param source_indices: Indices of source nodes in v
     :param is_Wtilde: Whether the matrix is W or Wtilde
     """
-    for _ in tqdm(range(0, max_iter), desc='Propagate voltage'):
+    for _ in range(0, max_iter):
         if is_Wtilde == True:
             v = matrix.dot(v)
         else:

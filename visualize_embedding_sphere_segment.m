@@ -15,7 +15,8 @@ ms_surf = 3 % Marker size on surface
 nlm = 5;
 theta_max = 90;
 phi_max = 180;
-exp_name = strcat('SphereTheta', num2str(theta_max), 'Phi', num2str(phi_max), 'nlm', num2str(nlm));
+exp_name='MnistNlmPerDigit1_expnr1'
+%exp_name = strcat('SphereTheta', num2str(theta_max), 'Phi', num2str(phi_max), 'nlm', num2str(nlm));
 folder = strcat('Results/', exp_name);
 
 save_figures = strcat('Figures/', exp_name)

@@ -99,3 +99,12 @@ if __name__ == '__main__':
     # plt.ylabel('Voltage')
     # plt.yscale('log')
     # plt.show()
+
+
+    def calc_ER(V1,s1,V2,s2):
+    selfV1=np.mean(V1[s1])
+    selfV2=np.mean(V2[s2])
+    cross12=np.mean(V1[s2])
+    cross21=np.mean(V2[s1])
+    dist=selfV1+selfV2-cross12-cross21
+    return dist,selfV1,selfV2,cross12,cross21
