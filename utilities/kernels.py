@@ -1,14 +1,14 @@
 import numpy as np
 from utilities.util import get_nn_indices
 
-def select_kernel(x, n, bw, config):
-    if config['kernelType'] == 'radial':
+def select_kernel(x, n, bw,  kernel_type):
+    if kernel_type == 'radial':
         kernel = radial_kernel(x, bw, n)
-    elif config['kernelType'] == 'radial_scaled':
+    elif kernel_type == 'radial_scaled':
         kernel = radial_kernel_scaled(x, bw, n)
-    elif config['kernelType'] == 'gaussian':
+    elif kernel_type == 'gaussian':
         kernel = gaussian_kernel(x, x, bw)
-    elif config['kernelType'] == 'gaussian_scaled':
+    elif kernel_type == 'gaussian_scaled':
         kernel = gaussian_kernel_scaled(x, x, bw, n)
     return kernel
 

@@ -1,4 +1,5 @@
 import scipy.spatial as spatial
+import numpy as np
 
 def get_union(list1, list2):
     """Get union of two lists"""
@@ -22,3 +23,10 @@ def get_nn_indices(x, y, r):
     nn_vector = [item for sublist in indices for item in sublist]
     return nn_indices, nn_vector
 
+
+def flatten_list(l):
+    return [item for sublist in l for item in sublist]
+
+def normalize_voltage(voltages):
+    max_voltage = np.max(voltages, axis=0)
+    return voltages/max_voltage

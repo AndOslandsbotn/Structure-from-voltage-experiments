@@ -1,0 +1,8 @@
+mnist:
+  digits: [3, 4]  # Digits of interest
+local_embedding:
+  metric: 'euclidean'  # Metric to use in cdist when thresholding points in voltage space based on distance to landmarks
+folders:
+  results_folder: ['Results', 'mnist_embedding']
+convexHull:
+  tol: 1.e-15  # Tolerance when calculating the convexHull

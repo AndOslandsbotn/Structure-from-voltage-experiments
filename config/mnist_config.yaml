@@ -1,0 +1,18 @@
+mnist:
+  landmarks_per_digit: [10, 10]  # position i corresponds to number of landmarks of digit type in digits position i
+  digits: [3, 4]  # Digits of interest
+  datasize: 500  # Size of dataset
+metricGraph:
+  kernelType: 'radial_scaled'  # Kernel type used to construct weight matrix
+  bandwidth: 8  # Bandwidth of kernel that constructs the weight matrix
+  source_radius: 8  # Source radius
+  rhoG: 1.e-1  # Inverse of resistance to ground
+voltageSolver:
+  max_iter: 300  # Maximum number of iterations when propagating voltage
+  tol: 1.e-7  # Tolerance on voltage change when propagating voltage
+folders:
+  results_folder: ['Results', 'mnist_embedding']
+  logg_folder: 'Logg'
+  fig_folder: ['Figures', 'mnist_embedding']
+general:
+  is_visualization: True

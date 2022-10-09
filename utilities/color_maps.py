@@ -12,6 +12,7 @@ def color_map():
     cmap['color_lightgreen'] = '#c0ff0c'
     cmap['color_orange'] = '#f5a565'
     cmap['color_darkgreen'] = '#40826d'
+    cmap['gray_white'] = '#f2f0e7'
     return cmap
 
 def color_map_list():
