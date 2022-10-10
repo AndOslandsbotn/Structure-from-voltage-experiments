@@ -8,18 +8,19 @@ from scipy.spatial.distance import cdist
 from utilities.visualization import find_convexHull, plotting_points_in_convexHull
 from utilities.util import flatten_list
 from utilities.multidimensional_scaling import multi_dim_scaling
-from utilities.color_maps import color_map, color_map_for_mnist, color_map_list
+from utilities.color_maps import color_map, color_map_for_mnist
 
 from definitions import CONFIG_VIZ_PATH
 from config.yaml_functions import yaml_loader
 config = yaml_loader(CONFIG_VIZ_PATH)
 
-import matplotlib
 import matplotlib.pyplot as plt
-from matplotlib.pylab import Rectangle, gca
 from matplotlib.offsetbox import AnnotationBbox, OffsetImage
 
 class MNIST_Visualization_Base():
+    """This class is for generating MNIST embedding figures for
+    the Structure-from-voltage-paper
+    """
     def __init__(self, config, experiment_nr):
         self.config = config
         self.data, \
@@ -273,8 +274,8 @@ class MNIST_Visualization_Local(MNIST_Visualization_Base):
 if __name__ == '__main__':
     level = 0
     digits = config['mnist']['digits']
-    load_experiment_nr = 2
-    embedding_type ='Local'
+    load_experiment_nr = 1
+    embedding_type ='Global'
 
     if embedding_type == 'Global':
         visualization_exp_name = f'global_expnr{load_experiment_nr}'
@@ -284,8 +285,8 @@ if __name__ == '__main__':
     elif embedding_type == 'Local':
         mnist_embedding_local = MNIST_Visualization_Local(config, experiment_nr=load_experiment_nr)
         #desired_landmarks = [1, 2, 3]  # For digit 3 when 10 total lm
-        #desired_landmarks = [5,6,7] # For digit 4 when 10 total lm
-        desired_landmarks = [5, 6, 7, 8] # This is a good subset of landmarks for digit 3 when 20 total lm
+        desired_landmarks = [5,6,7] # For digit 4 when 10 total lm
+        #desired_landmarks = [5, 6, 7, 8] # This is a good subset of landmarks for digit 3 when 20 total lm
         #desired_landmarks = [13, 15, 16, 17]  # This is an interesting subset for digit 4 when 20 total lm
 
         visualization_exp_name = f'local_expnr{load_experiment_nr}'

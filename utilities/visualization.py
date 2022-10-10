@@ -2,9 +2,11 @@ from scipy.spatial import ConvexHull
 import matplotlib.pyplot as plt
 
 def find_convexHull(landmarks):
+    """Find the convex hull between landmarks, note that we need d+1 landmarks for d dimensional embeddings"""
     return ConvexHull(landmarks)
 
 def plotting_points_in_convexHull(landmarks, points_in_hull, points_not_in_hull, hull):
+    """We visualize the convexHull and the points in the convexHull"""
     # We plot the mds embedding in 2D so we must remove higher dimensions
     landmarks = landmarks[:, 0:2]
     points_in_hull = points_in_hull[:, 0:2]

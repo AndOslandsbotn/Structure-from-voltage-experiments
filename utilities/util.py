@@ -25,8 +25,10 @@ def get_nn_indices(x, y, r):
 
 
 def flatten_list(l):
+    """Takes in a list of lists and flattens the outer list to one list"""
     return [item for sublist in l for item in sublist]
 
 def normalize_voltage(voltages):
+    """Normalize the voltage functions to have max value 1"""
     max_voltage = np.max(voltages, axis=0)
     return voltages/max_voltage

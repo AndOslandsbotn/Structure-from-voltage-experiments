@@ -1,7 +1,13 @@
 import numpy as np
+from scipy.spatial.distance import cdist
 from utilities.util import get_nn_indices
 
 def select_kernel(x, n, bw,  kernel_type):
+    """Selects a kernel of kerne_type
+    :param x: samples on which to construct the kernel
+    :param n: Number of sampels
+    :param bw: badnwidth of kernel
+    """
     if kernel_type == 'radial':
         kernel = radial_kernel(x, bw, n)
     elif kernel_type == 'radial_scaled':
@@ -23,7 +29,10 @@ def gaussian_kernel(x1, x2, bandwidth, factor=None):
     bandwidth = bandwidth
     if factor != None:
         bandwidth = factor * bandwidth
+
     D = broadcastL2Norm(x1, x2)
+    #D = cdist(x1, x2, metric='sqeuclidean')
+
     D = (-1 / (2 * bandwidth ** 2)) * D
     return np.exp(D)
 

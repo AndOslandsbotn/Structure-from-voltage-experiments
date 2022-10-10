@@ -19,6 +19,7 @@ def propagate_voltage(voltage, weight_matrix, source_indices, config):
     Parameters
     :param voltage: Initial voltage vector
     :param weight_matrix: adjacency matrix (weight matrix)
+    :param source_indices: Indices to all nodes that are radius r_s from a source landmark
     :param config: Configurations
     """
     voltage_prev = voltage
