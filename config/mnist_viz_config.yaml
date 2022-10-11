@@ -1,6 +1,8 @@
 mnist:
   digits: [3, 4]  # Digits of interest
 local_embedding:
+  digit: 3
+  landmarks_nr: [5,6,7]
   metric: 'euclidean'  # Metric to use in cdist when thresholding points in voltage space based on distance to landmarks
 folders:
   results_folder: ['Results', 'mnist_embedding']

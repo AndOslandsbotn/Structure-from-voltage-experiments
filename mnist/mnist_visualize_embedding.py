@@ -91,7 +91,7 @@ class MNIST_Visualization_Base():
         ax = plt.subplot(111)
 
         # Plot the multi-dim scaling embedding in 2D
-        plt.scatter(mds_emb[:, 0], mds_emb[:, 1], s=4, facecolor=cmap['color_darkgray'], lw=0)
+        plt.scatter(mds_emb[:, 0], mds_emb[:, 1], s=0.1, facecolor=cmap['color_darkgray'], lw=0)
 
         # Add images to the coordinates provided by the multi-dim scaling embedding
         for idx in range(0, len(data)):
@@ -105,6 +105,7 @@ class MNIST_Visualization_Base():
                                 xybox=(1., -1.),
                                 xycoords='data',
                                 frameon=False,
+                                pad=0.0,
                                 boxcoords="offset points")
             ax.add_artist(ab)
             ab.set(zorder=1)
@@ -129,8 +130,9 @@ class MNIST_Visualization_Base():
         plt.yticks(color='w')
         ax.set_facecolor('black')
         ax.add_artist(ab)
-
         ax.grid(True)
+        #plt.draw()
+
         return fig, ax
 
     def save_figure(self, fig, ax, filepath, filename):
@@ -157,7 +159,7 @@ class MNIST_Visualization_Global(MNIST_Visualization_Base):
 
         # Save figure to file
         folder = self.config['folders']['results_folder']
-        filepath = os.path.join(folder[0], folder[1] + '_' + f'{experiment_name}')
+        filepath = os.path.join(folder[0], folder[1] + '_visualization_' + f'{experiment_name}')
         filename = f'{experiment_name}_level{level}_digits{digits}_nlm{nlm}'
         self.save_figure(fig, ax, filepath, filename)
 
@@ -207,7 +209,7 @@ class MNIST_Visualization_Local(MNIST_Visualization_Base):
         plt.show()
         # Save figure to file
         folder = self.config['folders']['results_folder']
-        filepath = os.path.join(folder[0], folder[1] + '_' + f'{experiment_name}')
+        filepath = os.path.join(folder[0], folder[1] + '_visualization_' + f'{experiment_name}')
         filename = f'local_mnist_emb_lvl{level}_digits{digits}_nlm{nlm}_desired_lm{desired_landmarks}'
         self.save_figure(fig, ax, filepath, filename)
 
@@ -267,6 +269,6 @@ class MNIST_Visualization_Local(MNIST_Visualization_Base):
         plt.show()
         # Save figure to file
         folder = self.config['folders']['results_folder']
-        filepath = os.path.join(folder[0], folder[1] + '_' + f'{experiment_name}')
+        filepath = os.path.join(folder[0], folder[1] + '_visualization_' + f'{experiment_name}')
         filename = f'local_vs_global_digits{digits}_nlm{nlm}_desired_lm{desired_landmarks}'
         self.save_figure(fig, ax, filepath, filename)

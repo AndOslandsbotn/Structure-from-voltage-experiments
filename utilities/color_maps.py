@@ -14,6 +14,7 @@ def color_map():
     cmap['color_orange'] = '#f5a565'
     cmap['color_darkgreen'] = '#40826d'
     cmap['gray_white'] = '#f2f0e7'
+    cmap['transparent'] = '#FFFFFF00'
     return cmap
 
 def color_map_for_mnist():
@@ -21,5 +22,6 @@ def color_map_for_mnist():
     cmap = color_map()  # Get colors that we have specified
     cmap_mnist = []
     for key in cmap.keys():
-        cmap_mnist.append(colors.ListedColormap(['#FF000000', cmap[key]]))
+        #cmap_mnist.append(colors.ListedColormap(['#FF000000', cmap[key]]))
+        cmap_mnist.append(colors.ListedColormap([cmap['transparent'], cmap[key]]))
     return cmap_mnist
