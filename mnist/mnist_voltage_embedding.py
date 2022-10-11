@@ -195,20 +195,3 @@ class MNIST_Embedding():
         np.savez(filename, mnist_data=self.mnist_data, mnist_labels=self.mnist_labels,)
         return
 
-
-if __name__ == '__main__':
-    experiment_nr = 1
-    mnist = MNIST_Embedding(config)
-    mnist_data, labels, digit_indices = mnist.get_data()
-
-    # Select landmarks digit 3, level 0
-    digits = config['mnist']['digits']
-    landmarks_per_digit = config['mnist']['landmarks_per_digit']
-    for nlm, digit in zip(landmarks_per_digit, digits):
-        landmark_indices = np.random.choice(digit_indices[digit], size=nlm).reshape(-1, 1)
-        mnist.add_landmarks(landmark_indices, level=0, digit_type=digit)
-
-    mnist.specify_rhoG(level=0, digit=3, landmark_nr=0, rhoG=1e-3)
-    #mnist.specify_rhoG(level=0, digit=3, landmark_nr=4, rhoG=1e-2)
-
-    mnist.calc_voltages(experiment_nr=experiment_nr)
