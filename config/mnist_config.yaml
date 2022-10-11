@@ -1,3 +1,4 @@
+### This is the configurationfile for the mnist embedding class in mnist/minst_voltage_embedding.py
 mnist:
   landmarks_per_digit: [10, 10]  # position i corresponds to number of landmarks of digit type in digits position i
   digits: [3, 4]  # Digits of interest

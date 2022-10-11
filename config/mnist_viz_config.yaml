@@ -1,3 +1,4 @@
+## This is the configuration file for the visualization class in mnist/mnist_visualize_embedding.py
 mnist:
   digits: [3, 4]  # Digits of interest
 local_embedding:
