@@ -1,7 +1,7 @@
 mnist:
-  landmarks_per_digit: [5, 5]  # position i corresponds to number of landmarks of digit type in digits position i
+  landmarks_per_digit: [10, 10]  # position i corresponds to number of landmarks of digit type in digits position i
   digits: [3, 4]  # Digits of interest
-  datasize: 500  # Size of dataset
+  num_examp_digit: 250  # Number of examples from each digit
 metricGraph:
   kernelType: 'radial_scaled'  # Kernel type used to construct weight matrix
   bandwidth: 8  # Bandwidth of kernel that constructs the weight matrix

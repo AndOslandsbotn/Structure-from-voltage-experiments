@@ -24,6 +24,7 @@ class MNIST_Embedding():
 
     ## Variables:
     # mnist_data   # The mnist images as 784 dimensional vectors, stored as n x 784 numpy matrix
+    # num_examp_digit:  # Number of examples per digit
     # labels  # The labels of each image, numpy array of length n
     # digit_indices  # List of length 10, where element nr i is a numpy array
     # containing indices to digit nr i in the mnist dataset
@@ -51,9 +52,10 @@ class MNIST_Embedding():
         mnist_data, mnist_labels = load_mnist()
         results = pre_processing(mnist_data,
                                  mnist_labels,
-                                 datasize=self.config['mnist']['datasize'],
+                                 num_examp_digit=self.config['mnist']['num_examp_digit'],
                                  digit_types=self.config['mnist']['digits'])
-        self.mnist_data, self.mnist_labels, self.datasize, self.digit_indices = results
+        self.mnist_data, self.mnist_labels, self.num_examp_digit, self.digit_indices = results
+        self.datasize = len(self.mnist_data)
 
         self.digits = self.config['mnist']['digits']
         self.landmark_indices_dict = {}
@@ -195,3 +197,20 @@ class MNIST_Embedding():
         np.savez(filename, mnist_data=self.mnist_data, mnist_labels=self.mnist_labels,)
         return
 
+
+if __name__ == '__main__':
+    experiment_nr = 3
+    mnist = MNIST_Embedding(config)
+    mnist_data, labels, digit_indices = mnist.get_data()
+
+    # Select landmarks digit 3, level 0
+    digits = config['mnist']['digits']
+    landmarks_per_digit = config['mnist']['landmarks_per_digit']
+    for nlm, digit in zip(landmarks_per_digit, digits):
+        landmark_indices = np.random.choice(digit_indices[digit], size=nlm).reshape(-1, 1)
+        mnist.add_landmarks(landmark_indices, level=0, digit_type=digit)
+
+    #mnist.specify_rhoG(level=0, digit=3, landmark_nr=0, rhoG=1e-3)
+    #mnist.specify_rhoG(level=0, digit=3, landmark_nr=4, rhoG=1e-2)
+
+    mnist.calc_voltages(experiment_nr=experiment_nr)

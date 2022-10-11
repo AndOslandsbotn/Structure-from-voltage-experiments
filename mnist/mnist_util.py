@@ -10,32 +10,42 @@ def load_mnist():
         y = data['y_train']
     return x, y
 
-def pre_processing(mnistdata, labels, datasize=-1, digit_types=-1):
+def pre_processing(mnistdata, labels, num_examp_digit=-1, digit_types=-1):
     """Preprocessing of the mnist data. Select dataset of size datasize and normalize using
-    max value in the selected dataset"""
+    max value in the selected dataset
+    :param mnistdata: The mnist dataset
+    :param labels: Labels of the mnist dataset
+    :param num_examp_digit: Number of exmaples per digit number
+    :param digit_types: What digits we want to look at
+    """
     print('pre_processing', mnistdata.shape)
     assert all(digit >= 0 and digit <= 9 for digit in digit_types)
 
     # Wether to take the entire dataset
-    if datasize < 0:
-        datasize = mnistdata.shape[0]
+    if num_examp_digit < 0:
+        num_examp_digit = mnistdata.shape[0]
 
     # We select the digits
     digit_indices = np.sum(np.array([labels == digit for digit in digit_types]), axis=0)
     mnistdata=mnistdata[digit_indices == True,:]
     labels=labels[digit_indices == True]
 
+    # Organize the digits
+    digit_indices = organize_digits(labels)
+
     # Reduce the data size
-    idx = np.random.choice(np.arange(0, len(mnistdata)), size=min(mnistdata.shape[0], datasize))
+    idx = np.array([np.random.choice(digit_indices[digit], size=min(digit_indices[digit].shape[0], num_examp_digit)) for digit in digit_types]).flatten()
+
+    #idx = np.random.choice(np.arange(0, len(mnistdata)), size=min(mnistdata.shape[0], datasize))
     mnistdata = mnistdata[idx]
-    target = labels[idx]
+    labels = labels[idx]
 
     # Normalize
     mnistdata = mnistdata/np.max(mnistdata)
 
     # Organize the digits
-    digit_indices = organize_digits(target)
-    return mnistdata, target, mnistdata.shape[0], digit_indices
+    digit_indices = organize_digits(labels)
+    return mnistdata, labels, mnistdata.shape[0], digit_indices
 
 def organize_digits(target):
     """This function finds the indices of all digit 1,2,3,4 etc.

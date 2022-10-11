@@ -23,7 +23,7 @@ if __name__ == '__main__':
         landmark_indices = np.random.choice(digit_indices[digit], size=nlm).reshape(-1, 1)
         mnist.add_landmarks(landmark_indices, level=0, digit_type=digit)
 
-    mnist.specify_rhoG(level=0, digit=3, landmark_nr=0, rhoG=1e-3)
+    #mnist.specify_rhoG(level=0, digit=3, landmark_nr=0, rhoG=1e-3)
     #mnist.specify_rhoG(level=0, digit=3, landmark_nr=4, rhoG=1e-2)
 
     mnist.calc_voltages(experiment_nr=experiment_nr)
