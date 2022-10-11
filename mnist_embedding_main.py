@@ -16,7 +16,7 @@ if __name__ == '__main__':
     mnist = MNIST_Embedding(config)
     mnist_data, labels, digit_indices = mnist.get_data()
 
-    # Select landmarks digit 3, level 0
+    # Select landmarks
     digits = config['mnist']['digits']
     landmarks_per_digit = config['mnist']['landmarks_per_digit']
     for nlm, digit in zip(landmarks_per_digit, digits):
