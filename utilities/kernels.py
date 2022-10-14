@@ -30,8 +30,7 @@ def gaussian_kernel(x1, x2, bandwidth, factor=None):
     if factor != None:
         bandwidth = factor * bandwidth
 
-    D = broadcastL2Norm(x1, x2)
-    #D = cdist(x1, x2, metric='sqeuclidean')
+    D = cdist(x1, x2, metric='sqeuclidean')
 
     D = (-1 / (2 * bandwidth ** 2)) * D
     return np.exp(D)
