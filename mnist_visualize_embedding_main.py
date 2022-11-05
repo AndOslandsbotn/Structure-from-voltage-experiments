@@ -6,7 +6,7 @@ config = yaml_loader(CONFIG_VIZ_PATH)
 if __name__ == '__main__':
     level = 0
     digits = config['mnist']['digits']
-    load_experiment_nr = 1
+    load_experiment_nr = 3
     embedding_type ='Global'
 
     if embedding_type == 'Global':

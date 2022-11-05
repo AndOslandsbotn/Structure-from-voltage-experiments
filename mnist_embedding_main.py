@@ -12,7 +12,7 @@ if __name__ == '__main__':
 np.random.seed(42)
 
 if __name__ == '__main__':
-    experiment_nr = 2
+    experiment_nr = 3
     mnist = MNIST_Embedding(config)
     mnist_data, labels, digit_indices = mnist.get_data()
 
